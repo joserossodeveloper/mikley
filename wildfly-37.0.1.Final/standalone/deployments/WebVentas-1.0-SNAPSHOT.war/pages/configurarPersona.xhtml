@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Registro de Persona Natural</title>
+</h:head>
+
+<h:body>
+    <h:form id="formRegistro">
+        <p:growl id="messages" showDetail="true" />
+
+        <p:panel header="Formulario de Persona Natural">
+            
+            <p:panelGrid columns="3" styleClass="ui-panelgrid-blank" layout="grid">
+
+                <p:outputLabel for="tipoDoc" value="Tipo Documento:" />
+                <p:selectOneMenu id="tipoDoc" 
+                                 value="#{generalController.nuevaPersona.tipoDocumento}"
+                                 required="true" requiredMessage="El tipo de documento es obligatorio.">
+                    <f:selectItem itemLabel="Seleccione..." itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItem itemLabel="DNI" itemValue="DNI" />
+                    <f:selectItem itemLabel="RUC" itemValue="RUC" />
+                    <f:selectItem itemLabel="C.E." itemValue="CE" />
+                </p:selectOneMenu>
+                <p:message for="tipoDoc" />
+
+                <p:outputLabel for="numDoc" value="Nro. Documento:" />
+                <p:inputText id="numDoc" 
+                             value="#{generalController.nuevaPersona.numeroDocumento}"
+                             required="true" requiredMessage="El número es obligatorio."
+                             maxlength="15" />
+                <p:message for="numDoc" />
+
+                <p:outputLabel for="nombres" value="Nombres:" />
+                <p:inputText id="nombres" 
+                             value="#{generalController.nuevaPersona.nombres}"
+                             required="true" requiredMessage="Los nombres son obligatorios."
+                             maxlength="150" />
+                <p:message for="nombres" />
+
+                <p:outputLabel for="apePaterno" value="Apellido Paterno:" />
+                <p:inputText id="apePaterno" 
+                             value="#{generalController.nuevaPersona.apellidoPaterno}"
+                             required="true" requiredMessage="El apellido paterno es obligatorio."
+                             maxlength="100" />
+                <p:message for="apePaterno" />
+
+                <p:outputLabel for="apeMaterno" value="Apellido Materno:" />
+                <p:inputText id="apeMaterno" 
+                             value="#{generalController.nuevaPersona.apellidoMaterno}"
+                             maxlength="100" />
+                <p:message for="apeMaterno" />
+
+                <p:outputLabel for="fechaNac" value="Fecha Nacimiento:" />
+                <p:calendar id="fechaNac" 
+                            value="#{generalController.nuevaPersona.fechaNacimiento}" 
+                            pattern="dd/MM/yyyy" 
+                            mask="true" />
+                <p:message for="fechaNac" />
+
+                <p:outputLabel for="direccion" value="Dirección:" />
+                <p:inputText id="direccion" 
+                             value="#{generalController.nuevaPersona.direccion}"
+                             maxlength="255" />
+                <p:message for="direccion" />
+
+            </p:panelGrid>
+            
+            <f:facet name="footer">
+                <p:commandButton value="Guardar" 
+                                 actionListener="#{generalController.guardar}" 
+                                 update="formRegistro" />
+                <p:commandButton value="Cancelar" 
+                                 type="reset" 
+                                 styleClass="ui-button-secondary" />
+            </f:facet>
+
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

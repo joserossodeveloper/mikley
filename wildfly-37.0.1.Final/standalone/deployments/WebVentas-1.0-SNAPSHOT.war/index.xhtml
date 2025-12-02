@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Listado de Personas</title>
+</h:head>
+
+<h:body>
+    <h:form>
+        <p:commandButton value="Cargar Personas"
+                         actionListener="#{generalController.cargarPersonas}"
+                         update="tablaPersonas" />
+
+        <p:dataTable id="tablaPersonas" value="#{generalController.listaPersonas}" var="p"
+                     paginator="true" rows="5">
+
+            <p:column headerText="ID">
+                <h:outputText value="#{p.id}" />
+            </p:column>
+
+            <p:column headerText="Nombre">
+                <h:outputText value="#{p.nombres}" />
+            </p:column>
+
+            <p:column headerText="DNI">
+                <h:outputText value="#{p.numeroDocumento}" />
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>

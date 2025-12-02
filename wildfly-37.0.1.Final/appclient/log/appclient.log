@@ -1,0 +1,2 @@
+2025-11-12 11:17:55,828 INFO  [org.jboss.modules] (main) JBoss Modules version 2.1.6.Final
+2025-11-12 11:17:56,472 FATAL [org.jboss.as.server] (main) WFLYSRV0239: Aborting with exit code 1

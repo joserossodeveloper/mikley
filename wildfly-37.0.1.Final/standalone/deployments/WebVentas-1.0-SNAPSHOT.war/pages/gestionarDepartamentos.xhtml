@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Gestionar ventas</title>
+    </h:head>
+
+    <h:body>
+        <h:form id="formRegistro">
+            <p:growl id="messages" showDetail="true" />
+            <h1>Departametnos</h1>
+
+            <p:dataTable id="TablaPost"
+                         styleClass="table table-hover"
+                         var="menu" 
+                         value="#{generalController.departamentos}" 
+                         rowStyleClass="tablaBorde"  
+                         emptyMessage="No existe registro"
+                         rows="10" 
+                         paginator="true"
+                         rowIndexVar="row">
+                <p:columnGroup type="header" >
+                    <p:row>
+                        <p:column  width="80" class="tablaCabecera" headerText="" />
+                        <p:column  width="50" class="tablaCabecera" headerText="Nro" />
+                        <p:column  width="200" class="tablaCabecera" headerText="Nombre" />
+                    </p:row>
+
+                </p:columnGroup>
+                <p:column class="text-center tablaCelda">
+                    <p:commandButton value="Descargar Reporte PDF" 
+                    ajax="false" 
+                    icon="pi pi-file-pdf">
+
+                    <p:fileDownload value="#{generalController.archivoPDF}" />
+
+                    </p:commandButton>
+                </p:column>
+                <p:column class="tablaCelda">
+                    <h:outputText value="#{row+1}">
+                        <f:convertNumber type="number" groupingUsed="true" minFractionDigits="0" pattern="#00"/>
+                    </h:outputText>
+                </p:column>
+                <p:column class="tablaCelda">
+                    <h:outputText value="#{menu.nombre}" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

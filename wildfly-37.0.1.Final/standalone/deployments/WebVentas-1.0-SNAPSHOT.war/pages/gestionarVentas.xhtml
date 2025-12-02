@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Registrar Venta - Imprenta</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+        <style>
+            body { background-color: #f4f6f9; }
+            .card-custom { box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 10px; border: none; }
+            .header-title { color: #2c3e50; font-weight: 700; margin-bottom: 20px; }
+        </style>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <p:menubar styleClass="mb-4">
+                <f:facet name="start">
+                    <span style="font-weight: bold; font-size: 1.2rem; margin-right: 10px;">IMPRENTA KLEISER</span>
+                </f:facet>
+
+                <p:submenu label="Ventas" icon="pi pi-shopping-cart">
+                    <p:menuitem value="Nueva Venta" icon="pi pi-plus"/>
+                    <p:menuitem value="Historial" icon="pi pi-list"/>
+                </p:submenu>
+
+                <p:submenu label="Inventario" icon="pi pi-box">
+                    <p:menuitem value="Materiales" icon="pi pi-tags"/>
+                </p:submenu>
+
+                <f:facet name="end">
+                    <p:button value="Cerrar Sesión" icon="pi pi-power-off" styleClass="ui-button-danger ui-button-flat"/>
+                </f:facet>
+            </p:menubar>
+        </h:form>
+
+        <div class="container">
+            <h:form id="frmPrincipal">
+                <p:growl id="messages" showDetail="true"/>
+
+                <div class="card card-custom p-4">
+                    <div class="text-center">
+                        <h2 class="header-title">REGISTRAR NUEVA VENTA</h2>
+                    </div>
+
+                    <div class="ui-fluid">
+                        
+                        <p:fieldset legend="Datos del Cliente" styleClass="mb-4">
+                            <div class="row g-3">
+                                <div class="col-12 col-md-3">
+                                    <p:outputLabel for="tipoPersona" value="Tipo de Persona"/>
+                                    <p:selectOneMenu id="tipoPersona">
+                                        <f:selectItem itemLabel="Seleccione" itemValue=""/>
+                                        <f:selectItem itemLabel="Persona Natural" itemValue="NATURAL"/>
+                                        <f:selectItem itemLabel="Persona Jurídica" itemValue="JURIDICA"/>
+                                    </p:selectOneMenu>
+                                </div>
+
+                                <div class="col-12 col-md-4">
+                                    <p:outputLabel for="documento" value="Nro. Documento (DNI/RUC)"/>
+                                    <div class="ui-inputgroup">
+                                        <p:inputText id="documento" placeholder="Ingrese número..."/>
+                                        <p:commandButton icon="pi pi-search" styleClass="ui-button-primary"/>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-5">
+                                    <p:outputLabel for="nombreCliente" value="Cliente / Razón Social"/>
+                                    <p:inputText id="nombreCliente" readonly="true" placeholder="Se completará al buscar..."/>
+                                </div>
+                            </div>
+                        </p:fieldset>
+
+                        <p:fieldset legend="Detalle del Trabajo" styleClass="mb-4">
+                            <div class="row g-3">
+                                <div class="col-12 col-md-4">
+                                    <p:outputLabel for="producto" value="Producto"/>
+                                    <p:selectOneMenu id="producto" filter="true" filterMatchMode="contains">
+                                        <f:selectItem itemLabel="Seleccione" itemValue=""/>
+                                        <f:selectItem itemLabel="Gigantografía" itemValue="GIGANTO"/>
+                                        <f:selectItem itemLabel="Vinil Adhesivo" itemValue="VINIL"/>
+                                        <f:selectItem itemLabel="Tarjetas Personales" itemValue="TARJETAS"/>
+                                        <f:selectItem itemLabel="Volantes" itemValue="VOLANTES"/>
+                                    </p:selectOneMenu>
+                                </div>
+
+                                <div class="col-12 col-md-4">
+                                    <p:outputLabel for="material" value="Material / Acabado"/>
+                                    <p:selectOneMenu id="material">
+                                        <f:selectItem itemLabel="Seleccione" itemValue=""/>
+                                        <f:selectItem itemLabel="Lona 13 oz" itemValue="LONA13"/>
+                                        <f:selectItem itemLabel="Lona 10 oz" itemValue="LONA10"/>
+                                        <f:selectItem itemLabel="Vinil Mate" itemValue="VMATE"/>
+                                        <f:selectItem itemLabel="Vinil Brillante" itemValue="VBRILLO"/>
+                                    </p:selectOneMenu>
+                                </div>
+                                
+                                <div class="col-12 col-md-4">
+                                    <p:outputLabel for="fechaEntrega" value="Fecha de Entrega"/>
+                                    <p:datePicker id="fechaEntrega" showIcon="true" pattern="dd/MM/yyyy"/>
+                                </div>
+
+                                <div class="col-6 col-md-2">
+                                    <p:outputLabel for="ancho" value="Ancho (m)"/>
+                                    <p:inputNumber id="ancho" symbol=" m" symbolPosition="s" decimalPlaces="2"/>
+                                </div>
+                                <div class="col-6 col-md-2">
+                                    <p:outputLabel for="alto" value="Alto (m)"/>
+                                    <p:inputNumber id="alto" symbol=" m" symbolPosition="s" decimalPlaces="2"/>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <p:outputLabel for="descripcion" value="Descripción / Detalles de impresión"/>
+                                    <p:inputTextarea id="descripcion" rows="1" placeholder="Ej: Con ojalillos, corte demasía..."/>
+                                </div>
+                            </div>
+                        </p:fieldset>
+
+                        <div class="row g-3 justify-content-end">
+                            <div class="col-6 col-md-2">
+                                <p:outputLabel for="cantidad" value="Cantidad"/>
+                                <p:spinner id="cantidad" min="1" value="1"/>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <p:outputLabel for="precio" value="Precio Unitario"/>
+                                <p:inputNumber id="precio" symbol="S/ " decimalPlaces="2"/>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <p:outputLabel for="total" value="Total a Pagar" style="font-weight: bold"/>
+                                <p:inputNumber id="total" symbol="S/ " decimalPlaces="2" readonly="true" inputStyle="font-weight: bold; background-color: #e9ecef;"/>
+                            </div>
+                        </div>
+
+                        <p:divider />
+
+                        <div class="row mt-4">
+                            <div class="col-12 text-end">
+                                <p:commandButton value="Cancelar" icon="pi pi-times" styleClass="ui-button-secondary ui-button-flat me-2"/>
+                                <p:commandButton value="Generar Venta" icon="pi pi-check" styleClass="ui-button-success" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>
